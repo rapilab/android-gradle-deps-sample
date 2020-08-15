@@ -1,5 +1,6 @@
 package com.phodal.gradoid
 
+import com.phodal.gradoid.internal.dependency.SourceSetManager
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.component.SoftwareComponentFactory
@@ -47,6 +48,8 @@ class AppPlugin: Plugin<Project> {
     }
 
     private fun configureExtension() {
+        val sourceSetManager = SourceSetManager(project)
+        project.extensions.create("phodal", AppExtension::class.java, sourceSetManager)
 
     }
 

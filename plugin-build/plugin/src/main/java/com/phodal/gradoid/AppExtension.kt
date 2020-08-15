@@ -1,0 +1,9 @@
+package com.phodal.gradoid
+
+import com.phodal.gradoid.internal.dependency.SourceSetManager
+
+open class AppExtension(sourceSetManager: SourceSetManager) {
+    init {
+        sourceSetManager.setUpSourceSet("main")
+    }
+}
