@@ -1,15 +1,17 @@
 package com.phodal.gradoid
 
-import com.phodal.gradoid.internal.tasks.factory.TaskFactory
+import com.phodal.gradoid.internal.dependency.SourceSetManager
 import com.phodal.gradoid.internal.tasks.factory.TaskFactoryImpl
 import org.gradle.api.Project
+import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
 
-class ApplicationTaskManager(project: Project, extension: AppExtension, registry: ToolingModelBuilderRegistry?) {
-    protected val taskFactory: TaskFactory? = TaskFactoryImpl(project.tasks)
+class ApplicationTaskManager(val project: Project, extension: AppExtension, registry: ToolingModelBuilderRegistry?) {
+    private var taskContainer: TaskContainer = project.tasks
 
+    //    protected val taskFactory: TaskFactory? = TaskFactoryImpl(project.tasks)
     fun createTasksBeforeEvaluate() {
 
     }
@@ -40,7 +42,8 @@ class ApplicationTaskManager(project: Project, extension: AppExtension, registry
     }
 
     private fun createJavacTask() {
-
+        val task = this.taskContainer.register("phodalJavaCompile")
+        println(task)
     }
 
     private fun handleMicroApp() {
