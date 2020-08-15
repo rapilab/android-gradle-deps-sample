@@ -1,6 +1,6 @@
 plugins {
     java
-    id("com.ncorti.kotlin.gradle.template.plugin")
+    id("com.phodal.gradoid")
 }
 
 templateExampleConfig {

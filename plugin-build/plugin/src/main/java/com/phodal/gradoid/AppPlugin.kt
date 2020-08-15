@@ -1,4 +1,4 @@
-package com.ncorti.kotlin.gradle.template.plugin
+package com.phodal.gradoid
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -6,7 +6,7 @@ import org.gradle.api.Project
 const val EXTENSION_NAME = "templateExampleConfig"
 const val TASK_NAME = "templateExample"
 
-abstract class TemplatePlugin : Plugin<Project> {
+abstract class AppPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         // Add the 'template' extension object
         val extension = project.extensions.create(EXTENSION_NAME, TemplateExtension::class.java, project)

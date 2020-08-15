@@ -1,14 +1,14 @@
-package com.ncorti.kotlin.gradle.template.plugin
+package com.phodal.gradoid
 
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
 
-class TemplatePluginTest {
+class AppPluginTest {
 
     @Test
     fun `plugin is applied correctly to the project`() {
         val project = ProjectBuilder.builder().build()
-        project.pluginManager.apply("com.ncorti.kotlin.gradle.template.plugin")
+        project.pluginManager.apply("com.phodal.gradoid")
 
         assert(project.tasks.getByName("templateExample") is TemplateExampleTask)
     }

@@ -1,4 +1,4 @@
-package com.ncorti.kotlin.gradle.template.plugin
+package com.phodal.gradoid
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.RegularFileProperty

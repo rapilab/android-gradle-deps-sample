@@ -1,4 +1,4 @@
-package com.ncorti.kotlin.gradle.template.plugin
+package com.phodal.gradoid
 
 import javax.inject.Inject
 import org.gradle.api.Project
