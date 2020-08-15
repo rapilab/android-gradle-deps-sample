@@ -1,6 +1,5 @@
 package com.phodal.gradoid
 
-import com.phodal.gradoid.internal.dependency.DependencyConfigurator
 import com.phodal.gradoid.internal.dependency.SourceSetManager
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -10,6 +9,8 @@ import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
 import javax.inject.Inject
 
 class AppPlugin: Plugin<Project> {
+    private lateinit var variantManager: VariantManager
+    private lateinit var taskManager: ApplicationTaskManager
     private lateinit var extension: AppExtension
     private lateinit var project: Project
 
@@ -53,13 +54,22 @@ class AppPlugin: Plugin<Project> {
         val sourceSetManager = SourceSetManager(project)
         this.extension = project.extensions.create("phodal", AppExtension::class.java, sourceSetManager)
 
+        this.taskManager = ApplicationTaskManager(project, extension, registry);
+        this.variantManager = VariantManager(project, extension, taskManager, sourceSetManager)
+
     }
 
     private fun createTasks() {
 //        extension.getCompileSdkVersion()
-        DependencyConfigurator(project, project.name).configureDependencies()
+//        DependencyConfigurator(project, project.name).configureDependencies()
+
+        taskManager.createTasksBeforeEvaluate()
+        createAndroidTasks()
     }
 
+    private fun createAndroidTasks() {
+        variantManager.createVariantsAndTasks()
+    }
 
 
 }
