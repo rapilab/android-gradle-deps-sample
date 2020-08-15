@@ -9,5 +9,8 @@ open class AppExtension(sourceSetManager: SourceSetManager) {
 
     init {
         sourceSetManager.setUpSourceSet("main")
+
+        sourceSetManager.setUpTestSourceSet("androidTest")
+        sourceSetManager.setUpTestSourceSet("test")
     }
 }
