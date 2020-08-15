@@ -8,7 +8,7 @@ import org.gradle.util.GUtil
 import javax.inject.Inject
 
 open class DefaultAndroidSourceSet @Inject constructor(private val name: String, project: Project):
-    AndroidSourceSet {
+    AndroidSourceSet, SourceProvider {
     private val javaSource: AndroidSourceDirectorySet
     private val javaResources: AndroidSourceDirectorySet
 
