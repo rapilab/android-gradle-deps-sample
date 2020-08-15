@@ -7,5 +7,4 @@ class AndroidSourceSetFactory(val project: Project): NamedDomainObjectFactory<An
     override fun create(name: String): AndroidSourceSet {
         return project.objects.newInstance(DefaultAndroidSourceSet::class.java, name, project)
     }
-
 }
