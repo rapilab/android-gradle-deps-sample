@@ -8,6 +8,8 @@ dependencies {
     implementation(kotlin("stdlib-jdk7"))
     implementation(kotlin("reflect", BuildPluginsVersion.KOTLIN))
 
+    implementation("com.google.guava:guava:28.1-jre")
+
     implementation(gradleApi())
 
     testImplementation(TestingLib.JUNIT)

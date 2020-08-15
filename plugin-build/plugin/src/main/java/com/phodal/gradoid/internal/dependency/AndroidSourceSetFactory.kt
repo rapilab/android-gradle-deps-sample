@@ -1,5 +1,6 @@
 package com.phodal.gradoid.internal.dependency
 
+import com.phodal.gradoid.internal.api.DefaultAndroidSourceSet
 import org.gradle.api.NamedDomainObjectFactory
 import org.gradle.api.Project
 
