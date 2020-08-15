@@ -1,4 +1,4 @@
-package com.phodal.gradoid
+package com.phodal.gradoid.example
 
 import javax.inject.Inject
 import org.gradle.api.Project

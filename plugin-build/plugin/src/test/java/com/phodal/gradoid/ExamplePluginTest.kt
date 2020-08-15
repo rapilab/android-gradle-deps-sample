@@ -1,9 +1,10 @@
 package com.phodal.gradoid
 
+import com.phodal.gradoid.example.TemplateExampleTask
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
 
-class AppPluginTest {
+class ExamplePluginTest {
 
     @Test
     fun `plugin is applied correctly to the project`() {

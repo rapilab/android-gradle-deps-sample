@@ -1,4 +1,4 @@
-package com.phodal.gradoid
+package com.phodal.gradoid.example
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.RegularFileProperty
