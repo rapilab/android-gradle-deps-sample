@@ -161,3 +161,21 @@ void taskAction(IncrementalTaskInputs inputs) throws IOException {
 // dexing.
 // TODO(147137579): Configure Gradle to take transform flow #1.
 ```
+
+### androidTestImplementation
+
+```kotlin
+private fun createConfiguration(
+        name: String, description: String, canBeResolved: Boolean = false): Configuration {
+    logger.debug("Creating configuration {}", name)
+
+    val configuration = configurations.maybeCreate(name)
+
+    configuration.isVisible = false
+    configuration.description = description
+    configuration.isCanBeConsumed = false
+    configuration.isCanBeResolved = canBeResolved
+
+    return configuration
+}
+```
