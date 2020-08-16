@@ -2,6 +2,8 @@
 
  - 官方文档：[配置构建变体](https://developer.android.com/studio/build/build-variants?hl=zh-cn)
  - [sourceSets——Android Gadle 入门](https://juejin.im/post/6844904003478765575)
+ - Gradle 增量编译：[Incremental tasks](https://docs.gradle.org/current/userguide/custom_tasks.html#incremental_tasks)
+ - Groovy 元编程：[Runtime and compile-time metaprogramming](http://groovy-lang.org/metaprogramming.html#_methodmissing)
 
 
 ```
