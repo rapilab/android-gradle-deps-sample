@@ -19,17 +19,15 @@ open class PhodalCompile() : JavaCompile() {
         val javaSource = mutableListOf<FileTree>()
         javaSource.addAll(source)
 
-        this.classpath = project.files(File("lib"))
+        println(project.dependencies)
+//        this.classpath = project.files(File("libs"))
 
         this.source = this.project.files(javaSource.toList()).asFileTree
         this.destinationDir = File("build/classes")
-
 //        this.options.bootstrapClasspath => android.jar
     }
 
     override fun compile(inputs: IncrementalTaskInputs) {
-        println("compile")
-        println(JavaVersion.current().isJava8Compatible)
         super.compile(inputs)
     }
 }

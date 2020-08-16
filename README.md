@@ -140,3 +140,24 @@ void taskAction(IncrementalTaskInputs inputs) throws IOException {
     doIncrementalTaskAction(changedInputs);
 }
 ```
+
+
+`DependencyConfigurator.kt` 注释：
+
+```
+// When consuming classes from Android libraries, there are 2 transforms:
+//     1. `android-classes-directory` -> `android-classes`
+//     2. `android-classes-jar` -> `android-classes`
+// Currently Gradle always takes transform flow #1, which is ideal for incremental dexing.
+// (We don't know why Gradle does that, but IncrementalDesugaringTest should catch it if
+// this behavior changes.)
+
+
+
+// When consuming classes from Java libraries, there are 2 transforms:
+//     1. `java-classes-directory` -> `android-classes`
+//     2. `jar` -> `processed-jar` -> `android-classes-jar` -> `android-classes`
+// Currently Gradle always takes transform flow #2, which is not ideal for incremental
+// dexing.
+// TODO(147137579): Configure Gradle to take transform flow #1.
+```
