@@ -8,6 +8,7 @@ import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.file.FileTree
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
+import java.io.File
 
 class ApplicationTaskManager(val project: Project, extension: AppExtension, registry: ToolingModelBuilderRegistry?) {
     private var taskContainer: TaskContainer = project.tasks
@@ -46,7 +47,8 @@ class ApplicationTaskManager(val project: Project, extension: AppExtension, regi
         val task = this.taskContainer.create("phodalJavaCompile", PhodalCompile::class.java)
         task.configure()
 
-        println(task)
+        task.classpath = project.files(File("lib"))
+        task.destinationDir = File("out")
     }
 
     private fun handleMicroApp() {
