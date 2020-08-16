@@ -39,7 +39,7 @@ class ApplicationTaskManager(val project: Project, extension: AppExtension, regi
 
     private fun createJavacTask() {
         val task = this.taskContainer.create("phodalJavaCompile", PhodalCompile::class.java)
-//        task.source = project.
+        task.configure()
         println(task)
     }
 

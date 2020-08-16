@@ -9,7 +9,7 @@ import org.gradle.api.logging.Logging
 class SourceSetManager(project: Project) {
     private val configurations: ConfigurationContainer = project.configurations
     private val configuredSourceSets = mutableSetOf<String>()
-    private val sourceSetsContainer: NamedDomainObjectContainer<AndroidSourceSet> = project.container(
+    val sourceSetsContainer: NamedDomainObjectContainer<AndroidSourceSet> = project.container(
         AndroidSourceSet::class.java,
         AndroidSourceSetFactory(project))
     private val logger: Logger = Logging.getLogger(this.javaClass)
