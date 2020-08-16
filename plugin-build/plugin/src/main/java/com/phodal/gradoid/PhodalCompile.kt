@@ -6,6 +6,7 @@ import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.file.FileTree
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.incremental.IncrementalTaskInputs
+import org.gradle.work.InputChanges
 import java.io.File
 
 open class PhodalCompile() : JavaCompile() {
@@ -22,10 +23,12 @@ open class PhodalCompile() : JavaCompile() {
 
         this.source = this.project.files(javaSource.toList()).asFileTree
         this.destinationDir = File("build/classes")
+
+        this.options.isIncremental = true
 //        this.options.bootstrapClasspath => android.jar
     }
 
-    override fun compile(inputs: IncrementalTaskInputs) {
+    override fun compile(inputs: InputChanges) {
         super.compile(inputs)
     }
 }
