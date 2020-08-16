@@ -37,4 +37,11 @@ android {
   ...
 ```
 
+## Setup
+
+Install JDK 1.6
+
+```bash
+brew cask install java6
+```
 

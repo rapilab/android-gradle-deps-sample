@@ -10,8 +10,6 @@ import org.gradle.api.tasks.incremental.IncrementalTaskInputs
 import java.io.File
 
 open class PhodalCompile() : JavaCompile() {
-    private val classesOutputDirectory = project.objects.directoryProperty()
-
     fun configure() {
         val javaSourceSet = DefaultAndroidSourceSet("main", project)
         val sourceSets = ImmutableList.builder<ConfigurableFileTree>()
