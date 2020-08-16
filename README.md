@@ -59,3 +59,31 @@ AndroidX 对原始 Android [支持库](https://developer.android.com/topic/libra
 *   与支持库不同，`androidx` 软件包会单独维护和更新。从版本 1.0.0 开始，`androidx` 软件包使用严格的[语义版本控制](https://semver.org/)。您可以单独更新项目中的各个 AndroidX 库。
 
 *   [版本 28.0.0](https://developer.android.com/topic/libraries/support-library/revisions?hl=zh-cn#28-0-0) 是支持库的最后一个版本。我们将不再发布 `android.support` 库版本。所有新功能都将在 `androidx` 命名空间中开发。
+
+## 增量编译
+
+```java
+private void performIncrementalCompilation(InputChanges inputs, DefaultJavaCompileSpec spec) {
+    boolean isUsingCliCompiler = isUsingCliCompiler(spec);
+    File sourceClassesMappingFile = getSourceClassesMappingFile();
+    Multimap<String, String> oldMappings;
+    SourceFileClassNameConverter sourceFileClassNameConverter;
+    if (isUsingCliCompiler) {
+        oldMappings = null;
+        sourceFileClassNameConverter = new FileNameDerivingClassNameConverter();
+    } else {
+        oldMappings = readSourceClassesMappingFile(sourceClassesMappingFile);
+        sourceFileClassNameConverter = new DefaultSourceFileClassNameConverter(oldMappings);
+    }
+    sourceClassesMappingFile.delete();
+    spec.getCompileOptions().setIncrementalCompilationMappingFile(sourceClassesMappingFile);
+    Compiler<JavaCompileSpec> compiler = createCompiler(spec);
+    compiler = makeIncremental(inputs, sourceFileClassNameConverter, (CleaningJavaCompiler<JavaCompileSpec>) compiler, getStableSources().getAsFileTree());
+    WorkResult workResult = performCompilation(spec, compiler);
+    if (workResult instanceof IncrementalCompilationResult && !isUsingCliCompiler) {
+        // The compilation will generate the new mapping file
+        // Only merge old mappings into new mapping on incremental recompilation
+        mergeIncrementalMappingsIntoOldMappings(sourceClassesMappingFile, getStableSources(), inputs, oldMappings);
+    }
+}
+```
