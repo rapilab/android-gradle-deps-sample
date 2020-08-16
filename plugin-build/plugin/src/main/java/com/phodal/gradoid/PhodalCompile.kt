@@ -23,6 +23,8 @@ open class PhodalCompile() : JavaCompile() {
 
         this.source = this.project.files(javaSource.toList()).asFileTree
         this.destinationDir = File("build/classes")
+
+//        this.options.bootstrapClasspath => android.jar
     }
 
     override fun compile(inputs: IncrementalTaskInputs) {

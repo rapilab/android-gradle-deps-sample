@@ -45,3 +45,17 @@ Install JDK 1.6
 brew cask install java6
 ```
 
+编译命令后加上--profile，比如 gradlew build --profile，会输出打包过程的profile report。
+
+
+`androidx` 命名空间中的工件包含 Android [Jetpack](https://developer.android.com/jetpack?hl=zh-cn) 库。与支持库一样，`androidx` 命名空间中的库与 Android 平台分开提供，并向后兼容各个 Android 版本。
+
+AndroidX 对原始 Android [支持库](https://developer.android.com/topic/libraries/support-library?hl=zh-cn)进行了重大改进，后者现在已不再维护。`androidx` 软件包完全取代了支持库，不仅提供同等的功能，而且提供了新的库。
+
+此外，AndroidX 还包括以下功能：
+
+*   AndroidX 中的所有软件包都使用一致的命名空间，以字符串 `androidx` 开头。支持库软件包已映射到对应的 `androidx.*` 软件包。有关所有旧类到新类以及旧构建工件到新构建工件的完整映射，请参阅[软件包重构](https://developer.android.com/jetpack/androidx/refactor?hl=zh-cn)页面。
+
+*   与支持库不同，`androidx` 软件包会单独维护和更新。从版本 1.0.0 开始，`androidx` 软件包使用严格的[语义版本控制](https://semver.org/)。您可以单独更新项目中的各个 AndroidX 库。
+
+*   [版本 28.0.0](https://developer.android.com/topic/libraries/support-library/revisions?hl=zh-cn#28-0-0) 是支持库的最后一个版本。我们将不再发布 `android.support` 库版本。所有新功能都将在 `androidx` 命名空间中开发。
