@@ -20,7 +20,6 @@ open class PhodalCompile() : JavaCompile() {
 
         this.classpath = project.files(File("libs"))
 
-
         this.source = this.project.files(javaSource.toList()).asFileTree
         this.destinationDir = File("build/classes")
 //        this.options.bootstrapClasspath => android.jar
