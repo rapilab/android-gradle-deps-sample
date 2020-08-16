@@ -1,6 +1,7 @@
 package com.phodal.gradoid
 
 import com.phodal.gradoid.internal.dependency.SourceSetManager
+import com.phodal.gradoid.internal.scope.VariantScope
 import org.gradle.api.Project
 
 class VariantManager(
@@ -9,6 +10,8 @@ class VariantManager(
     val taskManager: ApplicationTaskManager,
     val sourceSetManager: SourceSetManager
 ) {
+    private val variantScopes: List<VariantScope>? = null
+
     fun createVariantsAndTasks() {
         createTasksForVariant()
     }
