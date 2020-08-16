@@ -87,3 +87,56 @@ private void performIncrementalCompilation(InputChanges inputs, DefaultJavaCompi
     }
 }
 ```
+
+### Android 增量类：
+
+```
+AidlCompile.java
+ColdswapArtifactsKickerTask.java
+KickerTask.java
+ManifestProcessorTask.java
+MergeManifests.java
+MergeResources.java
+MergeSourceSetFolders.java
+PackageApplication.java
+PrePackageApplication.java
+ProcessAndroidResources.java
+ProcessManifest.java
+ProcessTestManifest.java
+```
+
+基类主要逻辑：
+
+```
+@TaskAction
+void taskAction(IncrementalTaskInputs inputs) throws IOException {
+    if (!isIncremental()) {
+        doFullTaskAction();
+        return;
+    }
+
+    if (!inputs.isIncremental()) {
+        getProject().getLogger().info("Unable do incremental execution: full task run");
+        doFullTaskAction();
+        return;
+    }
+
+    final Map<File, FileStatus> changedInputs = Maps.newHashMap();
+    inputs.outOfDate(new Action<InputFileDetails>() {
+        @Override
+        public void execute(InputFileDetails change) {
+            changedInputs.put(change.getFile(), change.isAdded() ? FileStatus.NEW : FileStatus.CHANGED);
+        }
+    });
+
+    inputs.removed(new Action<InputFileDetails>() {
+        @Override
+        public void execute(InputFileDetails change) {
+
+            changedInputs.put(change.getFile(), FileStatus.REMOVED);
+        }
+    });
+
+    doIncrementalTaskAction(changedInputs);
+}
+```
