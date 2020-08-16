@@ -22,6 +22,8 @@ open class PhodalCompile() : JavaCompile() {
         this.classpath = project.files(File("libs"))
 
         this.source = this.project.files(javaSource.toList()).asFileTree
+
+        this.outputs.dir("build/classes")
         this.destinationDir = File("build/classes")
 
         this.options.isIncremental = true
