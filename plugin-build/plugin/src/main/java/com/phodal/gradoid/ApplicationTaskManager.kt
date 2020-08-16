@@ -1,11 +1,7 @@
 package com.phodal.gradoid
 
-import com.phodal.gradoid.internal.dependency.SourceSetManager
-import com.phodal.gradoid.internal.tasks.factory.TaskFactoryImpl
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskContainer
-import org.gradle.api.tasks.TaskProvider
-import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
 
 class ApplicationTaskManager(val project: Project, extension: AppExtension, registry: ToolingModelBuilderRegistry?) {
@@ -42,7 +38,8 @@ class ApplicationTaskManager(val project: Project, extension: AppExtension, regi
     }
 
     private fun createJavacTask() {
-        val task = this.taskContainer.register("phodalJavaCompile")
+        val task = this.taskContainer.create("phodalJavaCompile", PhodalCompile::class.java)
+//        task.source = project.
         println(task)
     }
 
