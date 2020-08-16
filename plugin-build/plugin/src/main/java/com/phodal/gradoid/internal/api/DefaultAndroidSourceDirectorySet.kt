@@ -1,8 +1,11 @@
 package com.phodal.gradoid.internal.api
 
+import com.google.common.collect.ImmutableList
+import com.google.common.collect.ImmutableMap
 import com.google.common.collect.Lists
 import groovy.lang.Closure
 import org.gradle.api.Project
+import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.file.FileTreeElement
 import org.gradle.api.specs.Spec
 import org.gradle.api.tasks.util.PatternFilterable
@@ -15,7 +18,7 @@ class DefaultAndroidSourceDirectorySet(
     private val type: SourceArtifactType
 ) :
     AndroidSourceDirectorySet {
-    private val source = Lists.newArrayList<Any>()
+    val source = Lists.newArrayList<Any>()
     val filter = PatternSet()
 
     override fun getFilter(): PatternFilterable {
@@ -96,5 +99,17 @@ class DefaultAndroidSourceDirectorySet(
     override fun exclude(excludeSpec: Closure<*>): PatternFilterable {
         filter.exclude(excludeSpec)
         return this
+    }
+
+    fun getSourceDirectoryTrees(): List<ConfigurableFileTree> {
+        return source.stream()
+                .map { sourceDir ->
+                    project.fileTree(
+                            ImmutableMap.of(
+                                    "dir", sourceDir,
+                                    "includes", includes,
+                                    "excludes", excludes))
+                }
+                .collect(ImmutableList.toImmutableList())
     }
 }
