@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 open class DefaultAndroidSourceSet @Inject constructor(private val name: String, project: Project):
     AndroidSourceSet, SourceProvider {
-    private val javaSource: AndroidSourceDirectorySet
+    val javaSource: AndroidSourceDirectorySet
     private val javaResources: AndroidSourceDirectorySet
 
     private val CONFIG_NAME_API = "api"

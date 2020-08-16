@@ -101,7 +101,7 @@ class DefaultAndroidSourceDirectorySet(
         return this
     }
 
-    fun getSourceDirectoryTrees(): List<ConfigurableFileTree> {
+    override fun getSourceDirectoryTrees(): List<ConfigurableFileTree> {
         return source.stream()
                 .map { sourceDir ->
                     project.fileTree(
