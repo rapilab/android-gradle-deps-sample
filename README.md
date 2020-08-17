@@ -200,7 +200,7 @@ private fun createConfiguration(
 // 5. The defaultConfig
 ```
 
-### 解决依赖
+### 处理依赖
 
 DependencyManager.resolveDependencyForConfig
 
@@ -260,4 +260,44 @@ DependencyManager.resolveDependencyForConfig
 
 // convert the LibInfo in LibraryDependencyImpl and update the reverseMap
 // with the converted keys
+```
+
+## Android 3.4 依赖处理
+
+VariantManager.configureDependencies
+
+```java
+// USE_ANDROID_X indicates that the developers want to be in the AndroidX world, whereas
+// ENABLE_JETIFIER indicates that they want to have automatic tool support for converting
+// not-yet-migrated dependencies. Developers may want to use AndroidX but disable Jetifier
+// for purposes such as debugging. However, disabling AndroidX and enabling Jetifier is not
+// allowed.
+
+// If Jetifier is enabled, replace old support libraries with AndroidX.
+
+
+/*
+ * Register transforms.
+ */
+// The aars/jars may need to be processed (e.g., jetified to AndroidX) before they can be
+// used
+// Arguments passed to an ArtifactTransform must not be null
+
+// transform to extract attr info from android.jar
+
+// API jar(s)
+
+// Runtime jars
+
+// Transform to go from external jars to CLASSES and JAVA_RES artifacts. This returns the
+// same exact file but with different types, since a jar file can contain both.
+
+
+// The Kotlin Kapt plugin should query for PROCESSED_JAR, but it is currently querying for
+// JAR, so we need to have the workaround below to make it get PROCESSED_JAR. See
+// http://issuetracker.google.com/111009645.
+
+// custom strategy for AndroidTypeAttr
+
+// custom strategy for build-type and product-flavor.
 ```
