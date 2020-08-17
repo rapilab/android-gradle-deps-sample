@@ -50,7 +50,7 @@ class ApplicationTaskManager(val project: Project, extension: AppExtension, regi
         val compile = createConfiguration("implementation", true)
         compile.dependencies.whenObjectAdded(SomeImplementationAction())
 
-        val phodalCompile = createConfiguration("phodalCompileClasspath", true)
+        val phodalCompile = createConfiguration("phodalImplementation", true)
         phodalCompile.dependencies.whenObjectAdded(SomeImplementationAction())
 
         val task = this.taskContainer.create("phodalJavaCompile", PhodalCompile::class.java)

@@ -25,7 +25,7 @@ open class PhodalCompile() : JavaCompile() {
 
         val configurations = project.configurations
         val config: Configuration = configurations.getByName("implementation")
-        val compileClasspath: Configuration = configurations.getByName("phodalCompileClasspath")
+        val compileClasspath: Configuration = configurations.getByName("phodalImplementation")
 
         compileClasspaths.add(config)
         compileClasspaths.add(compileClasspath)
