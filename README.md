@@ -179,3 +179,85 @@ private fun createConfiguration(
     return configuration
 }
 ```
+
+## Android 依赖顺序 （2.0 版本）
+
+```java
+// Add the container of dependencies.
+// The order of the libraries is important, in descending order:
+// variant-specific, build type, multi-flavor, flavor1, flavor2, ..., defaultConfig.
+// variant-specific if the full combo of flavors+build type. Does not exist if no flavors.
+// multi-flavor is the combination of all flavor dimensions. Does not exist if <2 dimension.
+
+// 1. add the variant-specific if applicable.
+
+// 2. the build type.
+
+// 3. the multi-flavor combination
+
+// 4. the flavors.
+
+// 5. The defaultConfig
+```
+
+### 解决依赖
+
+DependencyManager.resolveDependencyForConfig
+
+```
+// --- Handle the external/module dependencies ---
+// keep a map of modules already processed so that we don't go through sections of the
+// graph that have been seen elsewhere.
+
+
+// first get the compile dependencies. Note that in both case the libraries and the
+// jars are a graph. The list only contains the first level of dependencies, and
+// they themselves contain transitive dependencies (libraries can contain both, jars only
+// contains jars)
+
+// then the packaged ones.
+
+// now look through both results.
+// 1. Handle the compile and package list of Libraries.
+// For Libraries:
+// Only library projects can support provided aar.
+// However, package(publish)-only are still not supported (they don't make sense).
+// For now, provided only dependencies will be kept normally in the compile-graph.
+// However we'll want to not include them in the resource merging.
+// For Applications:
+// All Android libraries must be in both lists.
+// ---
+// Since we reuse the same instance of LibInfo for identical modules
+// we can simply run through each list and look for libs that are in only one.
+// While the list of library is actually a graph, it's fine to look only at the
+// top level ones since the transitive ones are in the same scope as the direct libraries.
+
+
+// 2. merge jar dependencies with a single list where items have packaged/compiled properties.
+// since we reuse the same instance of a JarInfo for identical modules, we can use an
+// Identity set (ie both compiledJars and packagedJars will contain the same instance
+// if it's both compiled and packaged)
+
+
+// go through the graphs of dependencies (jars and libs) and gather all the transitive
+// jar dependencies.
+// At the same this we set the compiled/packaged properties.
+
+// at this step, we know that libraries have been checked and libraries can only
+// be in both compiled and packaged scope.
+
+// the final list of JarDependency, created from the list of JarInfo.
+
+
+// --- Handle the local jar dependencies ---
+
+// also need to process local jar files, as they are not processed by the
+// resolvedConfiguration result. This only includes the local jar files for this project.
+
+
+// loop through both the compiled and packaged jar to compute the list
+// of jars that are: compile-only, package-only, or both.
+
+// convert the LibInfo in LibraryDependencyImpl and update the reverseMap
+// with the converted keys
+```

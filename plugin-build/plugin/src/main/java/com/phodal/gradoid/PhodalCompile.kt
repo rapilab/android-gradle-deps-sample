@@ -25,7 +25,7 @@ open class PhodalCompile() : JavaCompile() {
         val compileClasspath: Configuration = configurations.getByName("phodalImplementation")
         compileClasspaths.add(compileClasspath)
 
-        this.classpath = classPathsConfig(configurations, compileClasspaths)
+        this.classpath = mergeClassPath(configurations, compileClasspaths)
 
         this.source = this.project.files(javaSource.toList()).asFileTree
 
@@ -47,7 +47,7 @@ open class PhodalCompile() : JavaCompile() {
         return javaSource
     }
 
-    private fun classPathsConfig(
+    private fun mergeClassPath(
         configurations: ConfigurationContainer,
         mutableSet: MutableSet<Configuration>
     ): Configuration {
