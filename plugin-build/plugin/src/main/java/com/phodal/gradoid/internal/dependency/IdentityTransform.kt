@@ -1,6 +1,5 @@
 package com.phodal.gradoid.internal.dependency
 
-import com.phodal.gradoid.internal.dependency.GenericTransformParameters
 import org.gradle.api.artifacts.transform.InputArtifact
 import org.gradle.api.artifacts.transform.TransformAction
 import org.gradle.api.artifacts.transform.TransformOutputs
