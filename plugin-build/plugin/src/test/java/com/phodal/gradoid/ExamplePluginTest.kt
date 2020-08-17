@@ -10,6 +10,6 @@ class ExamplePluginTest {
         val project = ProjectBuilder.builder().build()
         project.pluginManager.apply("com.phodal.gradoid")
 
-//        assert(project.tasks.getByName("templateExample") is TemplateExampleTask)
+        assert(project.tasks.getByName("phodalJavaCompile") is PhodalCompile)
     }
 }
