@@ -72,7 +72,7 @@ class AppPlugin: Plugin<Project> {
         createAndroidTasks()
     }
 
-    private fun createAndroidTasks() {
+    fun createAndroidTasks() {
         configDependencies()
 
         variantManager.createVariantsAndTasks()
