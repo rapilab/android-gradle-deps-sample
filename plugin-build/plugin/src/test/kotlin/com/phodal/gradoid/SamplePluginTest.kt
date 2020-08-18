@@ -1,11 +1,7 @@
-package com.phodal.gradoid.com.phodal.gradoid
+package com.phodal.gradoid
 
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableMap
-import com.phodal.gradoid.AppExtension
-import com.phodal.gradoid.AppPlugin
-import com.phodal.gradoid.PhodalCompile
-import groovy.util.Eval
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Rule
